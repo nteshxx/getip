@@ -17,11 +17,11 @@ const ipaddress = {}
 }) */
 
 app.get('/getip', (req, res, next) => {
-  req.ip = req.headers['x-forwarded-for'] || getClientIp(req);
+  req.xip = req.headers['x-forwarded-for'] || getClientIp(req);
   console.log(req.ip);
   next();
   }, (req, res) => {
-    ipaddress["middleware"] = req.ip
+    ipaddress["middleware"] = req.xip
     ipaddress["request-ip"] = requestIp.getClientIp(req)
     ipaddress["x-forwarded-for"] = req.headers['x-forwarded-for']
     ipaddress["remoteAddress"] = req.socket.remoteAddress
