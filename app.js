@@ -15,13 +15,13 @@ const ipaddress = {}
 /* dns.lookup('www.medzgo.com', (error, add, family) => {
     ipaddress['dnsip'] = add;
 }) */
-app.use((req, res, next) => {
+function fetchIp(req, res, next) => {
   req.ip = req.headers['x-forwarded-for'] || getClientIp(req);
   console.log(req.ip);
   next();
 });
 
-app.get('/getip', (req, res) => {
+app.get('/getip', fetchIp, (req, res) => {
     ipaddress["middleware"] = req.ip
     ipaddress["request-ip"] = requestIp.getClientIp(req)
     ipaddress["x-forwarded-for"] = req.headers['x-forwarded-for']
