@@ -16,12 +16,15 @@ const ipaddress = {}
     ipaddress['dnsip'] = add;
 }) */
 
-app.get('/getip', (req, res, next) => {
-  req.xip = req.headers['x-forwarded-for'] || getClientIp(req);
+app.use((req, res, next) => {
+  req.ip4 = req.headers['x-forwarded-for'] || getClientIp(req) || 1.1.1.1;
   console.log(req.ip);
   next();
-  }, (req, res) => {
-    ipaddress["middleware"] = req.xip
+});
+
+
+app.get('/getip', (req, res) => {
+    ipaddress["middleware"] = req.ip4
     ipaddress["request-ip"] = requestIp.getClientIp(req)
     ipaddress["x-forwarded-for"] = req.headers['x-forwarded-for']
     ipaddress["remoteAddress"] = req.socket.remoteAddress
