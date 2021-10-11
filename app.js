@@ -8,7 +8,7 @@ const requestIp = require('request-ip')
 const superchargeRequestIp = require('@supercharge/request-ip')
 
 app.use(cors())
-app.set('trust proxy', true);
+//app.set('trust proxy', true);
 
 const ipaddress = {}
 
