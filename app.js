@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/getip', (req, res) => {
-    console.log(req.ip);
+    ipaddress["middleware"] = req.ip
     ipaddress["request-ip"] = requestIp.getClientIp(req)
     ipaddress["x-forwarded-for"] = req.headers['x-forwarded-for']
     ipaddress["remoteAddress"] = req.socket.remoteAddress
