@@ -16,19 +16,19 @@ const ipaddress = {}
     ipaddress['dnsip'] = add;
 }) */
 
-app.get('/getip', fetchIp(req, res, next) => {
+app.get('/getip', (req, res, next) => {
   req.ip = req.headers['x-forwarded-for'] || getClientIp(req);
   console.log(req.ip);
   next();
-}), (req, res) => {
+  }, (req, res) => {
     ipaddress["middleware"] = req.ip
     ipaddress["request-ip"] = requestIp.getClientIp(req)
     ipaddress["x-forwarded-for"] = req.headers['x-forwarded-for']
     ipaddress["remoteAddress"] = req.socket.remoteAddress
     ipaddress["@supercharge/request-ip"] = superchargeRequestIp.getClientIp(req)
     res.status(200).json({ipaddress});
-})
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`listening at PORT: ${process.env.PORT}`)
-})
+});
