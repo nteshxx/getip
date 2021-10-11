@@ -17,7 +17,7 @@ const ipaddress = {}
 }) */
 
 app.use((req, res, next) => {
-  req.ip4 = req.headers['x-forwarded-for'] || getClientIp(req) || 1.1.1.1;
+  req.ip4 = req.headers['x-forwarded-for'] || getClientIp(req) || '1.1.1.1';
   console.log(req.ip);
   next();
 });
